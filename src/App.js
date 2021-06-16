@@ -60,20 +60,20 @@ await app.registerUser(email, password);
 
       <div className="flex-container">
         
-        <a href="expenses">
+        <a href="/expenses">
         <i className="fas fa-calculator"></i>
         </a>
 
-        <a href="login">
+        <a href="/login">
         <i className="fas fa-user-circle"></i>
         </a>
       </div>
         <Switch>
           <Route path="/login" >
-            <Auth path="register" name="Login" message="Don't have account?"/>   
+            <Auth path="/register" name="Login" message="Don't have account?"/>   
           </Route>
           <Route path="/register">
-            <Auth Submit={()=> RegisterUser} path="login" name="Register" message="Already have account?"/>   
+            <Auth Submit={()=> RegisterUser} path="/login" name="Register" message="Already have account?"/>   
           </Route>
           <Route path="/expenses">
             <Expenses/>

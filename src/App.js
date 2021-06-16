@@ -7,6 +7,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 import {
+  HashRouter,
   BrowserRouter as Router,
   Switch,
   Route,
@@ -54,7 +55,7 @@ await app.registerUser(email, password);
 
 
   return (
-    <Router>
+    <HashRouter basename="/">
     <div className="App">
       <div className="App-header">
 
@@ -79,8 +80,8 @@ await app.registerUser(email, password);
             <Expenses/>
           </Route>
 
-          <Route path="/">
-            <a href="/register">SIGN UP</a>
+          <Route exact path="/">
+            <h3>Welcome</h3>
           </Route>
     </Switch>
 
@@ -90,7 +91,7 @@ await app.registerUser(email, password);
     </div>
 
 
-    </Router>
+    </HashRouter>
   );
 }
 

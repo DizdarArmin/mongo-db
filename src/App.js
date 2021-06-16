@@ -1,6 +1,20 @@
-import logo from './logo.svg';
+
 import * as Realm from "realm-web";
 import { useState } from 'react';
+
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import Auth from './components/Auth';
+import Expenses from './components/Expenses'
+
 
 
 
@@ -10,6 +24,7 @@ function App() {
 
 const REALM_APP_ID = "portofolio-ckmbp"; // e.g. myapp-abcde
 const app = new Realm.App({ id: REALM_APP_ID });
+
 
 function UserDetail({ user }) {
   return (
@@ -28,27 +43,54 @@ function Login({ setUser }) {
   return <button onClick={loginAnonymous}>Log In</button>;
 }
 
+async function RegisterUser(email, password){
+await app.registerUser(email, password);
 
+}
+
+  
   const [user, setUser] = useState(app.currentUser);
 
-  // If a user is logged in, show their details.
-  // Otherwise, show the login screen.
+
+
   return (
+    <Router>
     <div className="App">
       <div className="App-header">
 
-        <form className="login-register-parent">
-          <label>E-mail</label>
-          <input  type="e-mail "placeholder="e-mail"></input>
-          <input type="password" placeholder="*******"></input>
-          <input type="password" placeholder="*******"></input>
-          <button type="submit">Register</button>
-          <p>Already have account?
-            <a href="/">Click here!</a></p>
-        </form>
-        {user ? <UserDetail user={user} /> : <Login setUser={setUser} />}
+      <div className="flex-container">
+        
+        <a href="expenses">
+        <i className="fas fa-calculator"></i>
+        </a>
+
+        <a href="login">
+        <i className="fas fa-user-circle"></i>
+        </a>
       </div>
+        <Switch>
+          <Route path="/login" >
+            <Auth path="register" name="Login" message="Don't have account?"/>   
+          </Route>
+          <Route path="/register">
+            <Auth Submit={()=> RegisterUser} path="login" name="Register" message="Already have account?"/>   
+          </Route>
+          <Route path="/expenses">
+            <Expenses/>
+          </Route>
+
+          <Route path="/">
+            <a href="/register">SIGN UP</a>
+          </Route>
+    </Switch>
+
+      </div>
+
+
     </div>
+
+
+    </Router>
   );
 }
 

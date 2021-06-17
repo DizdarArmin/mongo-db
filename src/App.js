@@ -55,7 +55,7 @@ await app.registerUser(email, password);
 
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
     <div className="App">
       <div className="App-header">
 
@@ -70,17 +70,17 @@ await app.registerUser(email, password);
         </a>
       </div>
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/login" >
             <Auth path="/register" name="Login" message="Don't have account?"/>   
           </Route>
-          <Route path="/register">
+          <Route exact path="/register">
             <Auth Submit={()=> RegisterUser} path="/login" name="Register" message="Already have account?"/>   
           </Route>
-          <Route path="/expenses">
+          <Route exact path="/expenses">
             <Expenses/>
           </Route>
 
-          <Route path="/">
+          <Route exact path="/">
             <h3>Welcome</h3>
           </Route>
     </Switch>

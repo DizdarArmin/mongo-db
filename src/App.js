@@ -55,7 +55,7 @@ await app.registerUser(email, password);
 
 
   return (
-    <HashRouter basename="/">
+    <Router>
     <div className="App">
       <div className="App-header">
 
@@ -70,13 +70,13 @@ await app.registerUser(email, password);
         </a>
       </div>
         <Switch>
-          <Route path="login" >
+          <Route path="/login" >
             <Auth path="/register" name="Login" message="Don't have account?"/>   
           </Route>
-          <Route path="register">
+          <Route path="/register">
             <Auth Submit={()=> RegisterUser} path="/login" name="Register" message="Already have account?"/>   
           </Route>
-          <Route path="expenses">
+          <Route path="/expenses">
             <Expenses/>
           </Route>
 
@@ -91,7 +91,7 @@ await app.registerUser(email, password);
     </div>
 
 
-    </HashRouter>
+    </Router>
   );
 }
 
